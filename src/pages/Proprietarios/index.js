@@ -6,12 +6,16 @@ import { TextInput } from "react-native-gesture-handler";
 import ListItem from '../../components/Proprietarios/ListItem';
 import tbldp from '../../services/sqlite/Tbldp'
 
+
+
 export default function Proprietarios({navigation}) {
   const [dados, setDados] = useState([]);
   const [list, setList] = useState([]);
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
+   // tbldp.removeTab().then(console.log("tabela excluida com sucesso"))
+   
     if (searchText == '') {
       tbldp.all().then(items => {setDados(items), setList(items)}) 
     } else {
@@ -21,7 +25,7 @@ export default function Proprietarios({navigation}) {
 
   const handleOrderClick = () => {
     let newList = [...dados];
-    newList.sort((a, b) => (a.dpcpf > b.dpcpf ? 1 : b.dpcpf > a.dpcpf ? -1 : 0));
+    newList.sort((a, b) => (a.dpnome > b.dpnome ? 1 : b.dpnome > a.dpnome ? -1 : 0));
     setList(newList);
   };
 

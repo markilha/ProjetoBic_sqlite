@@ -2,27 +2,36 @@ import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { EdgeInsetsPropType } from 'react-native';
 import { View, Text, TextInput } from 'react-native';
-import database from "../../config/firebase";
 import styles from '../DetalheProp/styles';
-//import { TextInput } from 'react-native-paper';
+import tbldp from '../../services/sqlite/Tbldp'
+
 
 
 export default function DetalheProp({ navigation, route }) {
+  const [dpgeo, setdpgeo] = useState(route.params.dpgeo);
   const [dpcpf, setDepcpf] = useState(route.params.dpcpf);
   const [dpnome, setDepnome] = useState(route.params.dpnome);
-  const id = route.params.id;
+  const dpid = route.params.dpid;
 
   function editProp(dpcpf, dpnome) {
-    database.collection('tbldp').doc(id).update({
+    tbldp.update( dpid, {
       dpcpf: dpcpf,
-      dpnome: dpnome
-    });
+      dpnome: dpnome       
+    } )
+    .then( updated => console.log('Proprietário atualizado: '+ updated) )
+    .catch( err => console.log(err) )  
     navigation.navigate("Lista de Proprietários")
   }
 
 
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>Geocódigo</Text>
+      <TextInput
+        style={styles.input}
+        value={dpgeo}
+        onChangeText={text => setdpgeo(text)}
+      />
 
       <Text style={styles.label}>CPF</Text>
       <TextInput
@@ -46,9 +55,7 @@ export default function DetalheProp({ navigation, route }) {
         >
           <Text>Salvar</Text>
         </TouchableOpacity>
-      </View>
-
-    
+      </View>   
 
 
     </View>

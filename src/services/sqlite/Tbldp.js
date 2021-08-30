@@ -2,7 +2,7 @@ import db from "./SQLiteDatabse";
 
 db.transaction((tx) => {
   tx.executeSql(
-    "CREATE TABLE IF NOT EXISTS tbldp (dpid INTEGER PRIMARY KEY AUTOINCREMENT, dpgeo TEXT, dpcpf TEXT,dpnom TEXT);"
+    "CREATE TABLE IF NOT EXISTS tbldp (dpid INTEGER PRIMARY KEY AUTOINCREMENT, dpgeo TEXT, dpcpf TEXT,dpnome TEXT);"
   );
 });
 
@@ -108,6 +108,21 @@ const remove = (dpid) => {
     });
   });
 };
+const removeTab= () => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      //comando SQL modificável
+      tx.executeSql(
+        "DROP TABLE tbldp;",
+        [],
+        //-----------------------
+        (_, { rows }) => resolve(rows._array),
+        (_, error) => reject(error) // erro interno em tx.executeSql
+      );
+    });
+  });
+};
+
 
 export default {
   insert,
@@ -116,4 +131,5 @@ export default {
   findByCpf,
   all,
   remove,
+  removeTab
 };

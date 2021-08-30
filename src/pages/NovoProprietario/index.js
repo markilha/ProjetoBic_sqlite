@@ -1,18 +1,17 @@
 import React, { useState, useRef } from "react";
-import { Button, View, Text, TouchableOpacity, TextInput } from "react-native";
-//import {TextInput } from 'react-native-paper';
-import database from '../../config/firebase.js'
+import {View, Text, TouchableOpacity, TextInput } from "react-native";
 import styles from "./styles";
 import { TextInputMask } from 'react-native-masked-text'
+import tbldp from '../../services/sqlite/Tbldp'
 
 
 
 export default function NovoProprietario({ navigation, route }) {
 
-  const [imoid, setImoid] = useState(route.params.id)
   const [dpnome, setDpnome] = useState(null);
   const [dpcpf, setDpcpf] = useState(null);
   const cpfRef = useRef(null);
+  const imogeo = route.params.imogeo;
 
   function verificaCpf() {
     const unmask = cpfRef?.current.getRawValue();
@@ -23,21 +22,32 @@ export default function NovoProprietario({ navigation, route }) {
       return false;
     }
   }
-  function addLote() {
+
+  function addProp() {
     if (verificaCpf() === false) {
       return
     }
-    database.collection('tbldp').add({
-      imoid: imoid,
+    tbldp.insert( {
+      dpgeo: imogeo,
       dpcpf: dpcpf,
-      dpnome: dpnome
+      dpnome: dpnome      
     })
+    .then( id => console.log('Proprietário inserido com o dpid: '+ id) )
+    .catch( err => console.log(err) )
     navigation.navigate("Lotes");
   }
 
   return (
     <View style={styles.container}>
       <View style={{padding:5}}>
+
+      <Text style={styles.label}>Geocódigo:</Text>
+        <TextInput        
+          style={styles.input}
+          value={imogeo}
+          editable = {false}
+        />  
+        
         <Text style={styles.label}>CPF:</Text>
         <TextInputMask 
           style={styles.input}
@@ -56,7 +66,7 @@ export default function NovoProprietario({ navigation, route }) {
       <TouchableOpacity
           style={styles.buttonNewTask}
           onPress={() => {
-            addLote()
+            addProp()
           }}
         >
           <Text style={styles.iconButton}>Save</Text>

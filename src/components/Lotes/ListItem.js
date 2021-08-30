@@ -32,13 +32,7 @@ const ListItem = ({ data, navigation }) => {
         })
       }
     >
-      <View style={styles.itemInfo}>
-        <Text style={styles.itemP1}>{data.imosql}</Text>
-        <Text style={styles.itemP2}>{data.imomun}-{data.imobai}</Text>
-      </View>
-      <View style={styles.botoes}>
-
-        <TouchableOpacity
+       <TouchableOpacity
           style={{ marginRight: 30, paddingTop: 20 }}
           onPress={() => {
             deleteLote(data.imoid)
@@ -50,12 +44,20 @@ const ListItem = ({ data, navigation }) => {
             color="#F92e6A"
           />
         </TouchableOpacity>
+      <View style={styles.itemInfo}>
+        <Text style={styles.itemP1}>{data.imosql}</Text>
+        <Text style={styles.itemP2}>{data.imomun}</Text>
+        <Text style={styles.itemP2}>{data.imobai}</Text>
+      </View>
+      <View style={styles.botoes}>
+
+       
 
         <TouchableOpacity
           style={{ marginRight: 1, paddingTop: 20 }}
           onPress={() => {
             navigation.navigate("Novo Proprietario", {
-              id: data.id
+              imogeo: data.imogeo
             })
           }}
         >

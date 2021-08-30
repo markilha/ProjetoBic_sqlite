@@ -2,10 +2,10 @@
 import React, { useState } from "react"
 import { View, Text, TouchableOpacity, TextInput } from "react-native"
 import { TextInputMask } from 'react-native-masked-text'
-//import { TextInput } from 'react-native-paper';
 
 import tblimo from '../../services/sqlite/Tblimo';
 import styles from './styles';
+import Footer from '../../components/Home/Footer'
 
 export default function Detalhes({ navigation, route }) {
 
@@ -13,43 +13,42 @@ export default function Detalhes({ navigation, route }) {
   const [imosql, setImosql] = useState(route.params.imosql)
   const [imomun, setImomun] = useState(route.params.imomun)
   const [imobai, setImobai] = useState(route.params.imobai)
-  
+
   const id = route.params.imoid
 
-  function editLote(imogeo,imosql, imomun, imobai) {
-    tblimo.update( id, {
+  function editLote(imogeo, imosql, imomun, imobai) {
+    tblimo.update(id, {
       imogeo: imogeo,
       imosql: imosql,
       imomun: imomun,
-      imobai: imobai     
-    } )
-    .then( updated => console.log('Lote atualizado: '+ updated) )
-    .catch( err => console.log(err) )   
+      imobai: imobai
+    })
+      .then(updated => console.log('Lote atualizado: ' + updated))
+      .catch(err => console.log(err))
     navigation.navigate("Lotes")
   }
+
+
 
   return (
     <View style={styles.container}>
       <View>
-      <Text style={styles.label}>Geocódigo</Text>
+        <Text style={styles.label}>Geocódigo</Text>
         <TextInput
           style={styles.input}
           value={imogeo}
           onChangeText={text => setImogeo(text)}
         />
-
         <Text style={styles.label}>Setor - Quadra - Lote</Text>
         <TextInputMask
           type={'custom'}
           style={styles.input}
           value={imosql}
           onChangeText={text => setImosql(text)}
-          options={{          
+          options={{
             mask: '***-***-*****'
           }}
-         
-        />   
-
+        />
         <Text style={styles.label}>Município</Text>
         <TextInput
           style={styles.input}
@@ -66,17 +65,22 @@ export default function Detalhes({ navigation, route }) {
 
       </View>
 
-
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.buttonNewTask}
         onPress={() => {
-          editLote(imogeo,imosql, imomun, imobai)
+          editLote(imogeo, imosql, imomun, imobai)
         }}
       >
         <Text>Salvar</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      
+      <Footer
+        onPress={() => {
+          editLote(imogeo, imosql, imomun, imobai)
+        }}
+      />
+
+
     </View>
 
 

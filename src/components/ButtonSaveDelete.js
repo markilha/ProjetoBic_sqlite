@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import {AntDesign ,MaterialIcons} from '@expo/vector-icons';
-export default class FabButton extends Component {
+
+
+export default class ButtonSaveDelete extends Component {
 
     animation = new Animated.Value(0);
 
@@ -57,7 +59,7 @@ export default class FabButton extends Component {
                     onPress={this.props.onPress}
                 >
                     <Animated.View style={[styles.button, styles.submenu, transLote]}>                     
-                        <MaterialIcons name="terrain" size={24} color="#F5AD47" />
+                        <MaterialIcons name="delete" size={24} color="#F5AD47" />
                     </Animated.View>
                 </TouchableWithoutFeedback>
 
@@ -65,7 +67,7 @@ export default class FabButton extends Component {
                     onPress={this.props.onPress}
                 >
                     <Animated.View style={[styles.button, styles.submenu, transProp]}>                     
-                        <MaterialIcons name="people" size={24} color="#F5AD47" />
+                        <MaterialIcons name="save" size={24} color="#F5AD47" />
                     </Animated.View>
                 </TouchableWithoutFeedback>
 

@@ -1,45 +1,47 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import React, { Component } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const IconWrapper = props => {
-    return (
-        <View opacity={props.opacity} style={styles.iconWrapper}>
-            <Icon name={props.icon} size={28} />
-            <Text style={styles.title}>{props.children}</Text>
-        </View>
-    )
+export default class FabButton extends Component {
+
+
+    render() {
+
+        return (
+            <View style={[styles.container, this.props.style]}>
+                <TouchableWithoutFeedback
+                    onPress={this.props.onPress}
+                >
+                    <AntDesign name="save" size={40} color="#FFF" />
+                </TouchableWithoutFeedback>             
+            </View>
+        );
+    }
 }
-
-const Footer = () => {
-     return (
-        <View style={styles.container}>            
-            <IconWrapper icon="home">Home</IconWrapper>
-            <IconWrapper opacity={0.5} icon="bar-chart">Lotes</IconWrapper>    
-            <IconWrapper opacity={0.5} icon="bar-chart">Proprietários</IconWrapper>      
-        </View>
-    );
-};
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        width: '100%',
-        height: '8%',
+        width: 60,
+        height: 60,
+        position: "absolute",
+        bottom: 30,
+        right: 20,
+        backgroundColor: "#F92e6a",
+        borderRadius: 50,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    button: {
         position: 'absolute',
-        bottom: 0,
-        borderRightWidth: 24,
-        borderColor: '#FFF'
-    },
-    iconWrapper: {
-        alignItems: 'center'
-    },
-    title: {
-        fontSize: 18,
-        fontFamily: 'HelveticaNeue'
+        width: 60,
+        height: 60,
+        borderRadius: 60 / 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#00213B',
+        shadowOpacity: 0.3,
+        shadowOffset: {
+            height: 10,
+        }
     }
-});
-
-export default Footer;
+})

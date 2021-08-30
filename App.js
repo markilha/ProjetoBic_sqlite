@@ -54,8 +54,8 @@ export default function App() {
           options={{
             headerMode: 'screen',
             headerTintColor: 'white',
-            headerStyle: { backgroundColor: 'tomato' },
-
+            headerStyle: { backgroundColor: 'tomato' }, 
+                     
           }}
         />
 

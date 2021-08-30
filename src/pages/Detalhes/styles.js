@@ -33,7 +33,30 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center"
-  }  
+  },
+  button: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#00213B',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+        height: 10,
+    }
+},
+menu: {
+    backgroundColor: '#00213B',
+},
+submenu: {
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: '#00213B',
+
+}
 });
 
 export default styles
