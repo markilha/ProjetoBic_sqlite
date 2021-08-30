@@ -14,21 +14,6 @@ export default function Lotes({ navigation }) {
   const [list, setList] = useState([]);
   const [searchText, setSearchText] = useState(''); 
 
-  // useEffect(()=>{
-  //   tblimo.insert( {
-  //     imogeo: '1000',
-  //     imosql: '001',
-  //     imomun: '002',
-  //     imobai: '0005',
-  //     imoend: 'Capão bonito',
-  //     imonum: 'Centro'
-  //   })
-  //   .then( id => console.log('Lote inserido com o imoid: '+ id) )
-  //   .catch( err => console.log(err) )
-
-  // },[])
-
-
   useEffect(() => {
     if (searchText == '') {
       tblimo.all().then(items => {setDados(items), setList(items)}) 

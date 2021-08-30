@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
-import database from "../../config/firebase.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./styles";
 import { TextInput } from "react-native-gesture-handler";
 import ListItem from '../../components/Proprietarios/ListItem';
-
-
-
+import tbldp from '../../services/sqlite/Tbldp'
 
 export default function Proprietarios({navigation}) {
   const [dados, setDados] = useState([]);
@@ -16,18 +13,9 @@ export default function Proprietarios({navigation}) {
 
   useEffect(() => {
     if (searchText == '') {
-      database.collection("tbldp").onSnapshot((query) => {
-        const result = [];
-        query.forEach((doc) => {
-          result.push({ ...doc.data(), id: doc.id });
-        });
-        setDados(result);
-        setList(result)
-      });
+      tbldp.all().then(items => {setDados(items), setList(items)}) 
     } else {
-      setList(
-        dados.filter(item => (item.dpnome?.toLowerCase().indexOf(searchText?.toLocaleLowerCase()) > -1))
-      );
+      setList(dados.filter(item => (item.dpnome.toLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)));
     }
   }, [searchText]);
 
