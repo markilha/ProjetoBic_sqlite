@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Button} from 'react-native'
+import { Button } from 'react-native'
 
 import Lotes from './src/pages/Lotes';
 import NovoLote from './src/pages/NovoLote';
@@ -10,14 +10,14 @@ import Home from './src/pages/Home';
 import Proprietarios from './src/pages/Proprietarios'
 import NovoProprietario from './src/pages/NovoProprietario'
 import DetalheProp from './src/pages/DetalheProp'
+import Dados from './src/pages/Dados'
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-
+      <Stack.Navigator initialRouteName="Menu">
         <Stack.Screen
           name="Menu"
           component={Home}
@@ -34,8 +34,8 @@ export default function App() {
           options={{
             headerMode: 'screen',
             headerTintColor: 'white',
-            headerStyle: { backgroundColor: 'tomato' },               
-          }}         
+            headerStyle: { backgroundColor: 'tomato' },
+          }}
         />
 
         <Stack.Screen
@@ -54,8 +54,8 @@ export default function App() {
           options={{
             headerMode: 'screen',
             headerTintColor: 'white',
-            headerStyle: { backgroundColor: 'tomato' }, 
-                     
+            headerStyle: { backgroundColor: 'tomato' },
+
           }}
         />
 
@@ -77,12 +77,22 @@ export default function App() {
             headerTintColor: 'white',
             headerStyle: { backgroundColor: 'tomato' },
           }}
-         
+
         />
 
         <Stack.Screen
           name="Detalhe proprietáro"
           component={DetalheProp}
+          options={{
+            headerMode: 'screen',
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: 'tomato' },
+          }}
+        />
+
+        <Stack.Screen
+          name="Dados"
+          component={Dados}
           options={{
             headerMode: 'screen',
             headerTintColor: 'white',

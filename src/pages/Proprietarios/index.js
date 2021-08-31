@@ -21,7 +21,7 @@ export default function Proprietarios({navigation}) {
     } else {
       setList(dados.filter(item => (item.dpnome.toLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)));
     }
-  }, [searchText]);
+  }, [dados,searchText]);
 
   const handleOrderClick = () => {
     let newList = [...dados];

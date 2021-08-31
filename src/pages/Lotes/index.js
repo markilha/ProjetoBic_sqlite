@@ -12,15 +12,15 @@ import tblimo from '../../services/sqlite/Tblimo'
 export default function Lotes({ navigation }) {
   const [dados, setDados] = useState([]);
   const [list, setList] = useState([]);
-  const [searchText, setSearchText] = useState(''); 
-
+  const [searchText, setSearchText] = useState('');   
+ 
   useEffect(() => {
     if (searchText == '') {
-      tblimo.all().then(items => {setDados(items), setList(items)}) 
+     tblimo.all().then(items => {setDados(items), setList(items)})    
     } else {
       setList(dados.filter(item => (item.imosql.toLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)));
     }
-  }, [searchText]);
+  }, [dados,searchText]);
 
 
   const handleOrderClick = () => {

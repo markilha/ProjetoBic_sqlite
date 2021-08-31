@@ -37,10 +37,10 @@ export default function Home({ navigation }) {
 
 
                 </View>
-                <FabButton
+                {/* <FabButton
                     style={{ top: 470, right: 35 }}
                     onPress={() => navigation.navigate("Lotes")}
-                />
+                /> */}
 
             </View>
         </>
